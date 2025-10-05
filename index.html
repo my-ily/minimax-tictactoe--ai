@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Tic Tac Toe</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: linear-gradient(135deg, #74ebd5, #acb6e5);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .Game-container {
+      background-color: #ffffffcc;
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+      text-align: center;
+    }
+
+    .Game-container h1 {
+      margin-bottom: 20px;
+      color: #333;
+      font-size: 32px;
+    }
+
+    .board {
+      display: grid;
+      grid-template-columns: repeat(3, 100px);
+      gap: 10px;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .cell {
+      width: 100px;
+      height: 100px;
+      background-color: #fff;
+      border: 3px solid #444;
+      border-radius: 10px;
+      font-size: 48px;
+      font-weight: bold;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    .cell:hover {
+      background-color: #f0f0f0;
+    }
+
+    #reset {
+      margin-top: 15px;
+      padding: 10px 25px;
+      background-color: #2196f3;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    #reset:hover {
+      background-color: #0b7dda;
+    }
+
+    .statusText {
+      margin-top: 20px;
+      font-size: 20px;
+      font-weight: bold;
+      color: #444;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="Game-container">
+    <h1>Tic Tac Toe</h1>
+
+    <div class="board">
+      <div class="cell" data-cell="0"></div>
+      <div class="cell" data-cell="1"></div>
+      <div class="cell" data-cell="2"></div>
+      <div class="cell" data-cell="3"></div>
+      <div class="cell" data-cell="4"></div>
+      <div class="cell" data-cell="5"></div>
+      <div class="cell" data-cell="6"></div>
+      <div class="cell" data-cell="7"></div>
+      <div class="cell" data-cell="8"></div>
+    </div>
+
+    <button id="reset">Reset Game</button>
+    <div class="statusText">Welcome!</div>
+  </div>
+
+  <script>
+    // لا تغيير على الجافاسكريبت إطلاقًا
+    const cells = document.querySelectorAll('.cell');
+    let statusText = document.querySelector('.statusText');
+    const resetButton = document.getElementById('reset');
+    let currentPlayer = 'X';
+    let gameActive = true;
+    let board = ['', '', '', '', '', '', '', '', ''];
+
+    const winCondition = [
+      [0, 1, 2],
+      [3, 4, 5],
+      [6, 7, 8],
+      [0, 3, 6],
+      [1, 4, 7],
+      [2, 5, 8],
+      [0, 4, 8],
+      [2, 4, 6]
+    ];
+
+    init();
+
+    function init() {
+      cells.forEach(cell => cell.addEventListener('click', cellClicked));
+      resetButton.addEventListener('click', resetGame);
+      statusText.textContent = `${currentPlayer}'s turn`;
+    }
+
+    function cellClicked() {
+      const cellIndex = Number(this.getAttribute('data-cell'));
+
+      if (board[cellIndex] !== '' || !gameActive) {
+        return;
+      }
+
+      update(this, cellIndex);
+      checkWinner();
+    }
+
+    function update(cell, index) {
+      board[index] = currentPlayer;
+      cell.textContent = currentPlayer;
+    }
+
+    function changePlayer() {
+      currentPlayer = currentPlayer === 'X' ? 'O' : 'X';
+      statusText.textContent = `${currentPlayer}'s turn`;
+    }
+
+
+    //يعني اول شي بسوي لوب علئ شروط الفوز وياخذ الديمانشن الاول هو مصفوفه وبعدها
+    //  ياخذ كل رقم منها علئ شكل متغير ثم يتاكد اذا نفس بعض او لا
+    function checkWinner() {
+      let roundWon = false;
+      for (let i = 0; i < winCondition.length; i++) {
+        const condition = winCondition[i]; // [0, 1, 2] ... ياخذ وحده من الدايمانشن
+  const cellA = board[condition[0]]; // board[0]
+const cellB = board[condition[1]]; // board[1]
+const cellC = board[condition[2]]; // board[2]
+
+        if (cellA === '' || cellB === '' || cellC === '') {
+          continue;
+        }
+
+        if (cellA === cellB && cellB === cellC) {
+          roundWon = true;
+          break;
+        }
+      }
+
+      if (roundWon) {
+        statusText.textContent = `${currentPlayer} wins!`;
+        gameActive = false;
+        return;
+      }
+
+      if (!board.includes('')) {
+        statusText.textContent = `Draw!`;
+        gameActive = false;
+        return;
+      }
+
+      changePlayer();
+    }
+
+    function resetGame() {
+      currentPlayer = 'X';
+      board = ['', '', '', '', '', '', '', '', ''];
+      statusText.textContent = `${currentPlayer}'s turn`;
+      cells.forEach(cell => cell.textContent = '');
+      gameActive = true;
+    }
+  </script>
+</body>
+</html>

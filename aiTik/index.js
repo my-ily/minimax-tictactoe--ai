@@ -10,11 +10,17 @@ let currentPlayer = play1;
 let gameActive = true;
 let board = ['', '', '', '', '', '', '', '', ''];
 
-// اقرأ النتائج السابقة من LocalStorage أو ضع صفر
+
+
+
+
 let scoreX = parseInt(localStorage.getItem('scoreX')) || 0;
 let scoreO = parseInt(localStorage.getItem('scoreO')) || 0;
 
-// اعرض النتائج
+
+
+
+
 scoreboard.textContent = `X: ${scoreX} | O: ${scoreO}`;
 
 const winCondition = [
@@ -30,7 +36,8 @@ function init() {
   resetButton.addEventListener('click', resetGame);
   statusText.textContent = `${currentPlayer}'s turn`;
 
-  // لو اللاعب الثاني يبدأ أول مرة
+
+
   if (currentPlayer === play2) {
     setTimeout(computerMove, 500);
   }

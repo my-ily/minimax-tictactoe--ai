@@ -19,7 +19,7 @@ Welcome to **Aecy Games' Tic Tac Toe** project — a classic game with two excit
 
 ---
 
-## 🧠 AI Mode – Minimax Algorithm
+## AI Mode – Minimax Algorithm
 
 The **AI Mode** uses the [Minimax algorithm](https://en.wikipedia.org/wiki/Minimax) to simulate all possible moves and select the optimal one.  
 This ensures the AI never loses, and either wins or draws.
@@ -49,10 +49,9 @@ This mode is great for casual and unpredictable games.
 ---
 
 ## 📸 Screenshots
+<img width="526" height="718" alt="Screenshot 1447-04-15 at 7 08 59 PM" src="https://github.com/user-attachments/assets/c2e4c821-29aa-4b1d-acbc-5d162bc04308" />
 
-| Main Menu              | Game Board (AI)          |
-|------------------------|--------------------------|
-| ![Main Menu](assets/menu.png) | ![Game Board](assets/game.png) |
+
 
 > *Optional: Add actual screenshots in `/assets` folder*
 

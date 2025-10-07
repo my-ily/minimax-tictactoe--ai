@@ -10,7 +10,7 @@ Welcome to **Aecy Games' Tic Tac Toe** project — a classic game with two excit
 
 ## 🚀 Live Demo
 
-🔗 [Play the Game Now](https://your-live-demo-link.com)  
+🔗 [Play the Game Now](https://my-ily.github.io/minimax-tictactoe--ai/)  
 *(Replace with your actual deployment link if available)*
 
 ---
